@@ -33,7 +33,6 @@ public class ConveyorBelt {
           .vehicleColor(chooseCarColor())
           .build();
       conveyorBelt.add(carData);
-      Thread.sleep(2500);
     } catch (InterruptedException ex){
       logger.error("Erro ao adicionar carros à esteira: {}", ex.getMessage());
     } finally {

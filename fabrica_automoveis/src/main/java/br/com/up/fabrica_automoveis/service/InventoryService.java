@@ -29,7 +29,7 @@ public class InventoryService {
         inventory.poll();
       }
       logger.info("Aguardando o tempo de coleta das peças ...");
-      Thread.sleep(5000);
+      Thread.sleep(1000);
     } catch(InterruptedException ex){
       logger.error("Erro ao requisitar as peças ao inventário: {}", ex.getMessage());
     } finally {
