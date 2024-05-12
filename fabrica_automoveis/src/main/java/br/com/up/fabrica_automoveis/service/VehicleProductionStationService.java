@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Data
 @Service
@@ -17,6 +18,7 @@ public class VehicleProductionStationService implements Runnable{
   private UUID id;
   private ConveyorBelt conveyorBelt;
   private InventoryService inventoryService;
+  private final AtomicInteger employeeNumber = new AtomicInteger(1);
 
   {
     id = UUID.randomUUID();
@@ -34,10 +36,17 @@ public class VehicleProductionStationService implements Runnable{
 
   @Override
   public void run() {
-    System.out.println(inventoryService);
     inventoryService.requestParts();
     logger.info("A mesa com ID: {} recebeu 5 peças com sucesso", id);
-    conveyorBelt.addItems(5);
+
+    for(int i = 0; i < 5; i++){
+      logger.info("O funcionário {} da mesa: {} começou fabricar o carro.", employeeNumber,id);
+      var employee = employees.get(employeeNumber.get());
+      conveyorBelt.addItems(id, employee);
+      logger.info("O funcionário {} da mesa: {} terminou de fabricar o carro.", employeeNumber, id);
+      employeeNumber.incrementAndGet();
+    }
     logger.info("A mesa com ID: {} produziu 5 carros com sucesso", id);
+    employeeNumber.set(0);
   }
 }
