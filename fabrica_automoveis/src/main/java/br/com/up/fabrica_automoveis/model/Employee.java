@@ -33,15 +33,17 @@ public class Employee implements Runnable{
   private void organizeTools() {
     try {
       logger.info("O {} da mesa: {} começou organizar as ferramentas para inicializar a fabricação", employeeName, idProductionStationService);
+      //Thread.sleep(500);
     } catch (Exception ex) {
-      logger.error("O {} da mesa: {} não conseguiu organizar a ferramenta: {}", employeeName, idProductionStationService, ex.getMessage());
+      logger.error("O {} da mesa: {} não conseguiu organizar as ferramentas: {}", employeeName, idProductionStationService, ex.getMessage());
     }
   }
 
   private void getTheLeftTool() {
     try {
-      logger.info("O {} da mesa: {} pegou a ferramenta à sua esquerda", employeeName, idProductionStationService);
+      logger.info("O {} da mesa: {} tentando pegar a ferramenta à sua esquerda", employeeName, idProductionStationService);
       tools1.acquire();
+      logger.info("O {} da mesa: {} pegou a ferramenta à sua esquerda", employeeName, idProductionStationService);
     } catch (Exception ex) {
       logger.error("O {} da mesa: {} não conseguiu pegar a ferramenta à esquerda: {}", idProductionStationService, employeeName, ex.getMessage());
     }
@@ -49,8 +51,9 @@ public class Employee implements Runnable{
 
   private void getTheRightTool() {
     try {
-      logger.info("O {} da mesa: {} pegou a ferramenta à sua direita", employeeName, idProductionStationService);
+      logger.info("O {} da mesa: {} tentando pegar a ferramenta à sua direita", employeeName, idProductionStationService);
       tools2.acquire();
+      logger.info("O {} da mesa: {} pegou a ferramenta à sua direita", employeeName, idProductionStationService);
     } catch (Exception ex) {
       logger.error("O {} da mesa: {} não conseguiu pegar a ferramenta à direita: {}", idProductionStationService, employeeName, ex.getMessage());
     }
@@ -58,8 +61,8 @@ public class Employee implements Runnable{
 
   private void manufactureTheCar() {
     try {
-      logger.info("O {} da mesa: {} começou fabricar o carro", employeeName, idProductionStationService);
-      Thread.sleep(2500);
+      logger.info("O {} da mesa: {} começou a fabricar o carro", employeeName, idProductionStationService);
+      //Thread.sleep(2500);
     } catch (Exception ex) {
       logger.error("O {} da mesa: {} não conseguiu fabricar o carro: {}", idProductionStationService, employeeName, ex.getMessage());
     }
@@ -67,7 +70,7 @@ public class Employee implements Runnable{
 
   private void releaseLeftTool() {
     try {
-      logger.info("O {} da mesa: {} devolveu a ferramenta à esquerda", employeeName, idProductionStationService);
+      logger.info("O {} da mesa: {} devolvendo a ferramenta à esquerda", employeeName, idProductionStationService);
       tools1.release();
     } catch (Exception ex) {
       logger.error("O {} da mesa: {} não conseguiu devolver a ferramenta à esquerda: {}", idProductionStationService, employeeName, ex.getMessage());
@@ -76,7 +79,7 @@ public class Employee implements Runnable{
 
   private void releaseRightTool() {
     try {
-      logger.info("O {} da mesa: {} devolveu a ferramenta à direita", employeeName, idProductionStationService);
+      logger.info("O {} da mesa: {} devolvendo a ferramenta à direita", employeeName, idProductionStationService);
       tools2.release();
     } catch (Exception ex) {
       logger.error("O {} da mesa: {} não conseguiu devolver a ferramenta à direita: {}", idProductionStationService, employeeName, ex.getMessage());

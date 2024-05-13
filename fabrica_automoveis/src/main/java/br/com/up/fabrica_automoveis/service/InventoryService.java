@@ -29,11 +29,11 @@ public class InventoryService {
         inventory.poll();
       }
       logger.info("Aguardando o tempo de coleta das peças ...");
-      Thread.sleep(1000);
+      //Thread.sleep(1000);
+      semaphore.release();
     } catch(InterruptedException ex){
       logger.error("Erro ao requisitar as peças ao inventário: {}", ex.getMessage());
     } finally {
-      semaphore.release();
       logger.info("Tamanho atual do estoque: {}", inventory.size());
     }
   }
